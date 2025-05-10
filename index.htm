@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kishor Chandra Mahanta | Portfolio Analyst</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/js/all.min.js"></script>
+    <style>
+        :root {
+    --primary: #0a192f;
+    --secondary: #64ffda;
+    --text: #e6f1ff;
+    --text-secondary: #a8b2d1;
+    --background: #0a192f;
+    --card-bg: #112240;
+    --hover: #233554;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    overflow-x: hidden;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(10, 25, 47, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    transition: all 0.3s ease;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--secondary);
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2rem;
+}
+
+nav ul li a {
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
+}
+
+nav ul li a:hover {
+    color: var(--secondary);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 10%;
+    position: relative;
+}
+
+#canvas-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.greeting {
+    font-size: 1rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+}
+
+.hero-title {
+    font-size: 4rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+    font-size: 3rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+}
+
+.hero-description {
+    max-width: 600px;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.cta-btn {
+    background-color: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    border-radius: 4px;
+}
+
+.cta-btn:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+/* About Section */
+section {
+    padding: 100px 10%;
+}
+
+.section-title {
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    left: calc(100% + 20px);
+    top: 50%;
+    height: 1px;
+    width: 100px;
+    background-color: var(--text-secondary);
+}
+
+#about {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+.about-content {
+    flex: 1;
+}
+
+.about-text {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+}
+
+.profile-pic {
+    width: 300px;
+    height: 300px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.profile-pic-container {
+    position: relative;
+}
+
+.profile-pic-container::after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    width: 300px;
+    height: 300px;
+    border: 2px solid var(--secondary);
+    border-radius: 4px;
+    z-index: -1;
+    transition: all 0.3s ease;
+}
+
+.profile-pic-container:hover::after {
+    top: 10px;
+    left: 10px;
+}
+
+/* Skills Section */
+#skills {
+    display: flex;
+    flex-direction: column;
+}
+
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.skill-category {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+}
+
+.skill-category h3 {
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.skill-list {
+    list-style: none;
+}
+
+.skill-list li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.skill-list li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--secondary);
+}
+
+/* Experience Section */
+.experience-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.job {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.job:hover {
+    transform: translateY(-5px);
+}
+
+.job-title {
+    color: var(--text);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.job-company {
+    color: var(--secondary);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.job-duration {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.job-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.job-description ul {
+    list-style: none;
+    margin-top: 1rem;
+}
+
+.job-description ul li {
+    margin-bottom: 0.5rem;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.job-description ul li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--secondary);
+}
+
+/* Projects Section */
+.projects-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+}
+
+.project-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-title {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: var(--text);
+}
+
+.project-description {
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.project-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: auto;
+}
+
+.project-skill {
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+/* Education Section */
+.education-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.education-item {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 4px;
+    transition: transform 0.3s ease;
+}
+
+.education-item:hover {
+    transform: translateY(-5px);
+}
+
+.degree {
+    font-size: 1.2rem;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+}
+
+.school {
+    font-size: 1.1rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.education-duration {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+}
+
+.gpa {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Contact Section */
+#contact {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.contact-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.contact-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-icon {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+.contact-text {
+    color: var(--text-secondary);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--card-bg);
+    margin-top: 4rem;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.social-link {
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.social-link:hover {
+    color: var(--secondary);
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* Resume Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+    overflow-y: auto;
+    padding: 50px 20px;
+}
+
+.modal-content {
+    background-color: var(--background);
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 3rem;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: var(--secondary);
+}
+
+.resume-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.resume-header .name {
+    font-size: 2.5rem;
+}
+
+.resume-header .title {
+    font-size: 1.3rem;
+    color: var(--secondary);
+}
+
+.resume-contact {
+    text-align: right;
+    color: var(--text-secondary);
+}
+
+.resume-section {
+    margin-bottom: 2rem;
+}
+
+.resume-section-title {
+    font-size: 1.5rem;
+    color: var(--secondary);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--hover);
+}
+
+.print-btn {
+    background-color: var(--secondary);
+    color: var(--primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 4px;
+    margin-top: 2rem;
+}
+
+.print-btn:hover {
+    background-color: rgba(100, 255, 218, 0.8);
+}
+
+.cta-btn {
+    padding: 10px 20px;
+    background-color: transparent;
+    color: var(--secondary);
+    text-decoration: none;
+    margin-right: 10px;
+    border-radius: 5px;
+    display: inline-block;
+    border: 1px solid var(--secondary);
+    transition: all 0.3s ease;
+}
+
+.cta-btn:hover {
+    background-color: rgba(100, 255, 218, 0.1);
+}
+
+.hire-btn {
+    background-color: #28a745;
+    color: white;
+    border: 1px solid #28a745;
+}
+
+.hire-btn:hover {
+    background-color: #218838;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+
+/* Responsive Design */
+/* Tablet */
+@media (max-width: 1024px) {
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 2.5rem;
+    }
+    
+    .section-title::after {
+        width: 60px;
+    }
+    
+    .skills-container {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+    
+    .profile-pic, .profile-pic-container::after {
+        width: 250px;
+        height: 250px;
+    }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    header {
+        padding: 1rem;
+    }
+
+    nav ul {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg);
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem 0;
+        box-shadow: 0 10px 30px -10px rgba(2, 12, 27, 0.7);
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 1rem 0;
+    }
+
+    .hamburger {
+        display: block;
+        color: var(--text);
+    }
+
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1.8rem;
+    }
+    
+    .hero-description {
+        font-size: 1rem;
+    }
+
+    section {
+        padding: 80px 6%;
+    }
+
+    #about {
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .about-content {
+        text-align: center;
+    }
+    
+    .section-title::after {
+        display: none;
+    }
+    
+    .profile-pic, .profile-pic-container::after {
+        width: 220px;
+        height: 220px;
+    }
+
+    .projects-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .skills-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-info {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .modal-content {
+        padding: 2rem 1rem;
+    }
+
+    .resume-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    .resume-contact {
+        text-align: center;
+    }
+    
+    .resume-header .name {
+        font-size: 1.8rem;
+    }
+}
+
+/* Small Mobile Devices */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.5rem;
+    }
+    
+    .greeting {
+        font-size: 0.9rem;
+    }
+    
+    .cta-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        display: block;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+    
+    .profile-pic, .profile-pic-container::after {
+        width: 200px;
+        height: 200px;
+    }
+    
+    .job, .education-item, .skill-category {
+        padding: 1.5rem;
+    }
+    
+    .job-title, .degree {
+        font-size: 1.1rem;
+    }
+    
+    .contact-title {
+        font-size: 2rem;
+    }
+    
+    footer {
+        padding: 1.5rem;
+    }
+}
+
+/* Print styles for resume */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    
+    .modal, .modal-content, .modal * {
+        visibility: visible;
+    }
+    
+    .modal {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+        background: white;
+    }
+    
+    .modal-content {
+        margin: 0;
+        border: 0;
+        width: 100%;
+        padding: 1in;
+        box-shadow: none;
+    }
+    
+    .close-btn, .print-btn {
+        display: none;
+    }
+    
+    .resume-section-title {
+        color: #333;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <header id="navbar">
+        <div class="logo">KM</div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" id="resume-btn">Resume</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero">
+        <div id="canvas-container"></div>
+        <p class="greeting fade-in">Hi, my name is</p>
+        <h1 class="hero-title fade-in delay-1">Kishor Chandra Mahanta.</h1>
+        <h2 class="hero-subtitle fade-in delay-2">I turn data into solutions.</h2>
+        <p class="hero-description fade-in delay-3">I'm a solution-driven, analytical and detail-oriented professional experienced as a software developer with strong proficiencies in data management, reporting and problem-solving. Excited about turning raw data into real & measurable business value and supporting decision-making for the better.</p>
+        <a href="#contact" class="cta-btn fade-in delay-4">Get In Touch</a>
+    </section>
+
+    <section id="about">
+        <div class="about-content">
+            <h2 class="section-title">About Me</h2>
+            <p class="about-text">
+                I'm a skilled software developer with a strong focus on data analysis and visualization. My passion lies in creating solutions that transform complex data into actionable insights. With experience across frontend and backend technologies, I specialize in developing applications that not only solve problems but also provide valuable business intelligence.
+            </p>
+            <p class="about-text">
+                My approach combines technical expertise with analytical thinking to deliver measurable results. I enjoy collaborating across functions and am committed to continuous learning and staying current with emerging technologies in the data space.
+            </p>
+            <p class="about-text">
+                When I'm not coding or analyzing data, I'm exploring new technologies and finding ways to automate processes for greater efficiency.
+            </p>
+        </div>
+        <div class="profile-pic-container">
+            <img src=".src/photo.jpg" alt="Kishor Chandra Mahanta" class="profile-pic">
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Frontend Development</h3>
+                <ul class="skill-list">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                    <li>Next.js</li>
+                    <li>React.js</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Backend Processing</h3>
+                <ul class="skill-list">
+                    <li>Node.js</li>
+                    <li>Java</li>
+                    <li>REST APIs</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Data Management</h3>
+                <ul class="skill-list">
+                    <li>MySQL</li>
+                    <li>MongoDB</li>
+                    <li>Firebase</li>
+                    <li>Supabase</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Platforms</h3>
+                <ul class="skill-list">
+                    <li>Git</li>
+                    <li>GitHub</li>
+                    <li>Bitbucket</li>
+                    <li>Firebase Hosting</li>
+                    <li>Hostinger</li>
+                    <li>Netlify</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Data Analysis & Visualization</h3>
+                <ul class="skill-list">
+                    <li>Excel</li>
+                    <li>SQL Queries</li>
+                    <li>Dashboards</li>
+                </ul>
+            </div>
+            <div class="skill-category">
+                <h3>Other Skills</h3>
+                <ul class="skill-list">
+                    <li>AI Chatbots</li>
+                    <li>UI/UX Design</li>
+                    <li>Problem-Solving</li>
+                    <li>Project Management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="experience">
+        <h2 class="section-title">Work Experience</h2>
+        <div class="experience-container">
+            <div class="job">
+                <h3 class="job-title">Freelance Software Developer & Analyst</h3>
+                <p class="job-company">Independent</p>
+                <p class="job-duration">2023 - Present</p>
+                <div class="job-description">
+                    <ul>
+                        <li>Developed custom web applications integrating real-time databases and automated reporting features for startups and businesses.</li>
+                        <li>Designed data structures for efficient stock tracking, booking systems, and user management across different projects.</li>
+                        <li>Worked closely with clients to gather requirements, analyze business needs, and deliver actionable solutions.</li>
+                        <li>Automated workflows including booking systems and customer support through AI-powered chatbots.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-container">
+            <div class="project-card">
+                <img src=".src/Self drive.jpg" alt="Drives Project" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Drives – Self-Drive Car Rental Platform</h3>
+                    <p class="project-description">
+                        Built a system for real-time vehicle availability monitoring and booking trends reporting. Implemented secure payment processing and data analytics for availability forecasting.
+                    </p>
+                    <div class="project-skills">
+                        <span class="project-skill">Data Analysis</span> •
+                        <span class="project-skill">Payment Integration</span> •
+                        <span class="project-skill">Real-time Monitoring</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src=".src/Ai Bot.jpg" alt="AI Chatbot Project" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">AI Chatbot for Customer Support</h3>
+                    <p class="project-description">
+                        Designed an AI-powered chatbot to handle high-volume customer queries and collect customer interaction data for analysis. Implemented basic sentiment analysis models to improve response quality.
+                    </p>
+                    <div class="project-skills">
+                        <span class="project-skill">Data Collection</span> •
+                        <span class="project-skill">Sentiment Analysis</span> •
+                        <span class="project-skill">AI Models</span>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <img src=".src/NameBeats.png" alt="Beats Project" class="project-img">
+                <div class="project-content">
+                    <h3 class="project-title">Beats – Tune Download Platform (In Progress)</h3>
+                    <p class="project-description">
+                        Building a platform where users can purchase and download music tunes with small payments. Implementing real-time tracking to collect data on user behavior and download trends.
+                    </p>
+                    <div class="project-skills">
+                        <span class="project-skill">Payment Gateway</span> •
+                        <span class="project-skill">Data Storage</span> •
+                        <span class="project-skill">User Behavior Tracking</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="education-container">
+            <div class="education-item">
+                <h3 class="degree">Bachelor of Computer Applications (BCA)</h3>
+                <p class="school">Trident Academy of Technology, Bhubaneswar</p>
+                <p class="education-duration">2021 - 2024</p>
+                <p class="gpa">CGPA: 8.88/10</p>
+            </div>
+            <div class="education-item">
+                <h3 class="degree">Higher Secondary (+2 in Science)</h3>
+                <p class="school">Ganesh Institute of Engineering and Technology</p>
+                <p class="education-duration">2019 - 2021</p>
+                <p class="gpa">Percentage: 73%</p>
+            </div>
+            <div class="education-item">
+                <h3 class="degree">Matriculation (10th Standard)</h3>
+                <p class="school">Kaunrikala High School</p>
+                <p class="education-duration">2018 - 2019</p>
+                <p class="gpa">Percentage: 65%</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="contact-title">Get In Touch</h2>
+        <p class="contact-subtitle">I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll do my best to get back to you!</p>
+        <a href="mailto:kishormahanta004@gmail.com" class="cta-btn">Say Hello</a>
+<a href="mailto:kishormahanta004@gmail.com?subject=Direct%20Hire%20Enquiry&body=Hi%20Kishor%2C%0AI%27m%20interested%20in%20hiring%20you%20for%20a%20project.%20Please%20let%20me%20know%20your%20availability." class="cta-btn hire-btn">Hire Me</a>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <p class="contact-text">Keonjhar, Odisha</p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <p class="contact-text">kishormahanta004@gmail.com</p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="fas fa-phone"></i>
+                </div>
+                <p class="contact-text">+91 9348403545</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/kishor-mahanta-88b2a7217/" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/KishorMahanta" class="social-link" aria-label="GitHub" id="github-link">
+  <i class="fab fa-github"></i>
+</a>
+           <a href="https://wa.me/919348403545" class="social-link" aria-label="WhatsApp" target="_blank">
+  <i class="fab fa-whatsapp"></i>
+</a>
+
+        </div>
+        <p class="footer-text">Designed & Built by Kishor Chandra Mahanta</p>
+        <p class="footer-text">© 2025 All Rights Reserved</p>
+    </footer>
+
+    <!-- Resume Modal -->
+    <div id="resume-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <div class="resume-header">
+                <div>
+                    <h1 class="name">KISHOR CHANDRA MAHANTA</h1>
+                    <p class="title">Portfolio Analyst & Software Developer</p>
+                </div>
+                <div class="resume-contact">
+                    <p>📍 Keonjhar, Odisha</p>
+                    <p>📧 kishormahanta004@gmail.com</p>
+                    <p>📞 +91 9348403545</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">CAREER OBJECTIVE</h2>
+                <p class="job-description">Solution-driven, analytical and detail-oriented professional experienced as a software developer with strong proficiencies in data management, reporting and problem-solving. Excited about turning raw data into real & measurable business value and supporting decision-making for the better. Skilled in collaborating across functions to achieve measurable bottom line results.</p>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">TECHNICAL SKILLS</h2>
+                <div class="job-description">
+                    <ul>
+                        <li><strong>Frontend (for reporting tools):</strong> HTML, CSS, JavaScript, Next.js, React.js</li>
+                        <li><strong>Backend Processing:</strong> Node.js, Java</li>
+                        <li><strong>Data Management:</strong> MySQL, MongoDB, Firebase, Supabase</li>
+                        <li><strong>Tools & Platforms:</strong> Git, GitHub, Bitbucket, Firebase Hosting, Hostinger, Netlify</li>
+                        <li><strong>Data Analysis & Visualization:</strong> Excel, SQL Queries, Dashboards</li>
+                        <li><strong>Other Skills:</strong> REST APIs, AI Chatbots for automated customer interaction, UI/UX Design</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">WORK EXPERIENCE</h2>
+                <div class="job">
+                    <h3 class="job-title">Freelance Software Developer & Analyst</h3>
+                    <p class="job-duration">2023 - Present</p>
+                    <div class="job-description">
+                        <ul>
+                            <li>Developed custom web applications integrating real-time databases and automated reporting features for startups and businesses.</li>
+                            <li>Designed data structures for efficient stock tracking, booking systems, and user management across different projects.</li>
+                            <li>Worked closely with clients to gather requirements, analyze business needs, and deliver actionable solutions.</li>
+                            <li>Automated workflows including booking systems and customer support through AI-powered chatbots.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">PROJECTS</h2>
+                <div class="job">
+                    <h3 class="job-title">Drives – Self-Drive Car Rental Platform (2024)</h3>
+                    <div class="job-description">
+                        <ul>
+                            <li>Built a system for real-time vehicle availability monitoring and booking trends reporting.</li>
+                            <li><strong>Skills Applied:</strong> Data Analysis for Availability Forecasting, Secure Payment Integration</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job">
+                    <h3 class="job-title">AI Chatbot for Customer Support (2024)</h3>
+                    <div class="job-description">
+                        <ul>
+                            <li>Designed an AI-powered chatbot to handle high-volume customer queries and collect customer interaction data for analysis.</li>
+                            <li><strong>Skills Applied:</strong> Data Collection, Sentiment Analysis (basic AI models)</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="job">
+                    <h3 class="job-title">Beats – Tune Download and Social Media Platform (In Progress: 2025)</h3>
+                    <div class="job-description">
+                        <ul>
+                            <li>Building a platform where users can purchase and download music tunes with small payments.</li>
+                            <li>Designed a secure payment system and user database to track purchases, downloads, and social interactions.</li>
+                            <li>Implemented real-time tracking to collect data on user behavior, download trends, and engagement for business analysis.</li>
+                            <li><strong>Skills Applied:</strong> Payment Gateway Integration, Data Storage & Analysis, User Behavior Tracking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">EDUCATION</h2>
+                <div class="job">
+                    <h3 class="job-title">Bachelor of Computer Applications (BCA)</h3>
+                    <p class="job-company">Trident Academy of Technology, Bhubaneswar</p>
+                    <p class="job-duration">2021 – 2024</p>
+                    <p>CGPA: 8.88/10</p>
+                </div>
+                <div class="job">
+                    <h3 class="job-title">Higher Secondary (+2 in Science)</h3>
+                    <p class="job-company">Ganesh Institute of Engineering and Technology</p>
+                    <p class="job-duration">2019 – 2021</p>
+                    <p>Percentage: 73%</p>
+                </div>
+                <div class="job">
+                    <h3 class="job-title">Matriculation (10th Standard)</h3>
+                    <p class="job-company">Kaunrikala High School</p>
+                    <p class="job-duration">2018 – 2019</p>
+                    <p>Percentage: 65%</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">ACHIEVEMENTS</h2>
+                <div class="job-description">
+                    <ul>
+                        <li>Delivered 1 live projects integrating analytics, automation, and user for real businesses.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">CORE STRENGTHS</h2>
+                <div class="job-description">
+                    <ul>
+                        <li><strong>Problem-Solving & Logical Thinking</strong> – Ability to analyze complex problems and develop efficient solutions.</li>
+                        <li><strong>Adaptability & Quick Learning</strong> – Passion for continuous learning and keeping up with new technologies.</li>
+                        <li><strong>Strong Communication & Teamwork</strong> – Experienced in working with teams, handling client requirements, and delivering projects on time.</li>
+                        <li><strong>Leadership & Project Management</strong> – Successfully managed multiple projects from development to deployment.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2 class="resume-section-title">LANGUAGE</h2>
+                <div class="job-description">
+                    <ul>
+                        <li>Oriya</li>
+                        <li>English</li>
+                        <li>Hindi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <button class="print-btn" id="print-resume">Print Resume</button>
+        </div>
+    </div>
+
+    <script>
+        // 3D Background Animation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Three.js initialization
+            const canvas = document.getElementById('canvas-container');
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true });
+            
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setClearColor(0x000000, 0);
+            canvas.appendChild(renderer.domElement);
+            
+            // Create particles
+            const particlesGeometry = new THREE.BufferGeometry();
+            const particlesCount = 1000;
+            
+            const posArray = new Float32Array(particlesCount * 3);
+            
+            for(let i = 0; i < particlesCount * 3; i++) {
+                posArray[i] = (Math.random() - 0.5) * 5;
+            }
+            
+            particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+            
+            const particlesMaterial = new THREE.PointsMaterial({
+                size: 0.005,
+                color: 0x64ffda
+            });
+            
+            const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+            scene.add(particlesMesh);
+            
+            camera.position.z = 2;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                particlesMesh.rotation.y += 0.001;
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+            
+            // Resize handling
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+            
+            // Scroll animation
+            const sections = document.querySelectorAll('section');
+            
+            window.addEventListener('scroll', () => {
+                const scrollPos = window.scrollY + window.innerHeight * 0.7;
+                
+                sections.forEach(section => {
+                    if (scrollPos > section.offsetTop) {
+                        section.classList.add('fade-in');
+                    }
+                });
+            });
+            
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.style.boxShadow = '0 10px 30px -10px rgba(2, 12, 27, 0.7)';
+                } else {
+                    navbar.style.boxShadow = 'none';
+                }
+            });
+            
+            // Mobile menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+            
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Resume modal functionality
+            const resumeBtn = document.getElementById('resume-btn');
+            const resumeModal = document.getElementById('resume-modal');
+            const closeModal = document.getElementById('close-modal');
+            const printBtn = document.getElementById('print-resume');
+            
+            resumeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                resumeModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModal.addEventListener('click', () => {
+                resumeModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === resumeModal) {
+                    resumeModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            printBtn.addEventListener('click', () => {
+                window.print();
+            });
+        });
+
+          document.getElementById('github-link').addEventListener('click', function(event) {
+    event.preventDefault();  // Prevent the link from immediately redirecting
+    alert("As per the terms and conditions, the code for client projects is not available on GitHub as it is not shared with third parties.");
+    window.location.href = this.href;  // Redirect to the GitHub link after the message
+  });
+    </script>
+</body>
+</html>
